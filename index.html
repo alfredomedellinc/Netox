@@ -12,24 +12,25 @@
             align-items: center;
             height: 100vh;
             margin: 0;
-            background-color: #121212; /* Fondo oscuro para más estilo */
+            background-color: #121212;
             color: white;
+            overflow: hidden;
         }
 
         .container {
             text-align: center;
             background: #1e1e1e;
-            padding: 4rem;
+            padding: 3rem;
             border-radius: 30px;
             box-shadow: 0 0 50px rgba(255, 255, 255, 0.1);
             border: 2px solid #333;
+            max-width: 90%;
         }
 
         h1 {
-            font-size: 3.5rem;
-            margin-bottom: 2.5rem;
+            font-size: 3rem;
+            margin-bottom: 2rem;
             text-transform: uppercase;
-            letter-spacing: 2px;
             background: linear-gradient(to right, #fff, #888);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
@@ -37,63 +38,75 @@
 
         .buttons {
             display: flex;
-            gap: 30px;
+            gap: 20px;
             justify-content: center;
         }
 
         button {
-            padding: 20px 60px;
-            font-size: 1.5rem;
+            padding: 15px 40px;
+            font-size: 1.2rem;
             font-weight: 900;
             border: none;
-            border-radius: 15px;
+            border-radius: 12px;
             cursor: pointer;
-            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            transition: all 0.3s ease;
             text-transform: uppercase;
         }
 
-        .btn-si {
-            background-color: #ffffff;
-            color: #000;
+        .btn-si { background-color: #ffffff; color: #000; }
+        .btn-no { background-color: #333; color: #fff; }
+
+        button:hover { transform: scale(1.1); }
+
+        /* Estilo para el video */
+        video {
+            width: 100%;
+            max-width: 600px;
+            border-radius: 15px;
+            box-shadow: 0 0 30px rgba(0, 150, 255, 0.5);
+            margin-top: 20px;
         }
 
-        .btn-no {
-            background-color: #333;
-            color: #fff;
-        }
-
-        button:hover {
-            transform: scale(1.15);
-            box-shadow: 0 0 30px rgba(255,255,255,0.4);
-        }
-
-        button:active {
-            transform: scale(0.9);
+        .mensaje-victoria {
+            font-size: 1.8rem;
+            color: #4CAF50;
+            margin-bottom: 15px;
         }
     </style>
 </head>
 <body>
 
-    <div class="container">
+    <div id="main-content" class="container">
         <h1>¿ERES NETOX?</h1>
         <div class="buttons">
             <button class="btn-si" onclick="playMeme()">SÍ</button>
-            <button class="btn-no" onclick="alert('Intento de escape fallido')">NO</button>
+            <button class="btn-no" onclick="mostrarVideo()">NO</button>
         </div>
     </div>
 
     <audio id="memeAudio">
-        <source src="WHO TF IS GIGA N_GGA _ Sound Effect.mp3" type="audio/mpeg">
+        <source src="audio.mp3" type="audio/mpeg">
     </audio>
 
     <script>
         function playMeme() {
             const audio = document.getElementById("memeAudio");
-            audio.currentTime = 0; // Reinicia el audio si se presiona varias veces
-            audio.play().catch(e => {
-                console.error("Error al reproducir:", e);
-                alert("¡Sube el volumen!");
-            });
+            audio.currentTime = 0;
+            audio.play().catch(e => alert("¡Activa el sonido!"));
+        }
+
+        function mostrarVideo() {
+            const container = document.getElementById("main-content");
+            // Reemplazamos el contenido con el mensaje y el video
+            container.innerHTML = `
+                <div class="mensaje-victoria">¡FELICIDADES! Eres mejor que los nigger</div>
+                <video id="starmanVideo" autoplay controls>
+                    <source src="video.mp4" type="video/mp4">
+                    Tu navegador no soporta videos.
+                </video>
+                <br>
+                <button onclick="location.reload()" style="margin-top:20px; padding:10px; font-size:1rem;">Volver</button>
+            `;
         }
     </script>
 
